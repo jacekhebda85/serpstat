@@ -1,0 +1,260 @@
+{
+    "settings": {
+      "index": {
+        "refresh_interval": "1m",
+        "indexing": {
+          "slowlog": {
+            "level": "info",
+            "threshold": {
+              "index": {
+                "warn": "10s",
+                "trace": "500ms",
+                "debug": "1s",
+                "info": "5s"
+              }
+            },
+            "source": "1000"
+          }
+        },
+        "translog": {
+          "sync_interval": "5s",
+          "durability": "async"
+        },
+        "blocks": {
+          "read_only_allow_delete": "false"
+        },
+        "provided_name": "serpstat_ua_positions_2",
+        "max_inner_result_window": "60000",
+        "max_result_window": "60000",
+        "creation_date": "1588588032137",
+        "store": {
+          "type": "niofs"
+        },
+        "unassigned": {
+          "node_left": {
+            "delayed_timeout": "60m"
+          }
+        },
+        "analysis": {
+          "filter": {
+            "ru_RU": {
+              "locale": "ru_RU",
+              "type": "hunspell",
+              "dedup": "true"
+            },
+            "uk_UA": {
+              "locale": "uk_UA",
+              "type": "hunspell",
+              "dedup": "true"
+            }
+          },
+          "analyzer": {
+            "exact": {
+              "filter": [
+                "lowercase"
+              ],
+              "type": "custom",
+              "tokenizer": "whitespace"
+            },
+            "ukrainian": {
+              "filter": [
+                "lowercase",
+                "uk_UA",
+                "ru_RU"
+              ],
+              "type": "custom",
+              "stopwords": "_none_",
+              "tokenizer": "standard"
+            },
+            "url_analyzer": {
+              "flags": "CASE_INSENSITIVE",
+              "pattern": "[^\\p{IsAlphabetic}\\p{Digit}]+",
+              "type": "pattern"
+            }
+          }
+        },
+        "number_of_replicas": "1",
+        "uuid": "dRf7L1E-QpWgANcMsWS_1g",
+        "version": {
+          "created": "6080399"
+        },
+        "codec": "best_compression",
+        "routing": {
+          "allocation": {
+            "total_shards_per_node": "3"
+          }
+        },
+        "search": {
+          "slowlog": {
+            "level": "info",
+            "threshold": {
+              "fetch": {
+                "warn": "1s",
+                "trace": "200ms",
+                "debug": "500ms",
+                "info": "800ms"
+              },
+              "query": {
+                "warn": "10s",
+                "trace": "500ms",
+                "debug": "1s",
+                "info": "5s"
+              }
+            }
+          }
+        },
+        "number_of_shards": "176",
+        "merge": {
+          "scheduler": {
+            "max_thread_count": "6"
+          }
+        }
+      }
+    },
+    "mappings": {
+      "dynamic": "false"
+      },
+      "properties": {
+        "ad_keywords": {
+          "type": "long"
+        },
+        "ads": {
+          "type": "long"
+        },
+        "concurrency": {
+          "type": "byte"
+        },
+        "cost": {
+          "type": "scaled_float",
+          "scaling_factor": 100
+        },
+        "date": {
+          "type": "date"
+        },
+        "difficulty": {
+          "type": "scaled_float",
+          "scaling_factor": 100
+        },
+        "domain": {
+          "type": "keyword"
+        },
+        "down_keywords": {
+          "type": "long"
+        },
+        "dynamic": {
+          "type": "byte"
+        },
+        "first_position": {
+          "type": "byte"
+        },
+        "first_url": {
+          "type": "keyword",
+          "fields": {
+            "search": {
+              "type": "text",
+              "analyzer": "url_analyzer"
+            }
+          }
+        },
+        "found_results": {
+          "type": "long"
+        },
+        "geo_names": {
+          "type": "keyword"
+        },
+        "keyword": {
+          "type": "text",
+          "fields": {
+            "exact": {
+              "type": "text",
+              "analyzer": "exact"
+            }
+          },
+          "analyzer": "ukrainian"
+        },
+        "keyword_crc": {
+          "type": "integer"
+        },
+        "keyword_id": {
+          "type": "long"
+        },
+        "keyword_length": {
+          "type": "byte"
+        },
+        "keywords": {
+          "type": "long"
+        },
+        "lang": {
+          "type": "keyword"
+        },
+        "leader_group": {
+          "type": "boolean"
+        },
+        "modified_date": {
+          "type": "date"
+        },
+        "new_keywords": {
+          "type": "long"
+        },
+        "out_keywords": {
+          "type": "long"
+        },
+        "parent_keyword": {
+          "type": "keyword"
+        },
+        "position": {
+          "type": "byte"
+        },
+        "region_queries_count": {
+          "type": "integer"
+        },
+        "region_queries_count_last": {
+          "type": "long"
+        },
+        "region_queries_count_wide": {
+          "type": "integer"
+        },
+        "right_spelling": {
+          "type": "keyword"
+        },
+        "rised_keywords": {
+          "type": "long"
+        },
+        "size": {
+          "type": "long"
+        },
+        "subdomain": {
+          "type": "keyword"
+        },
+        "traff": {
+          "type": "long"
+        },
+        "types": {
+          "type": "keyword"
+        },
+        "url": {
+          "type": "keyword",
+          "fields": {
+            "search": {
+              "type": "text",
+              "analyzer": "url_analyzer"
+            }
+          }
+        },
+        "url_crc": {
+          "type": "integer"
+        },
+        "visible": {
+          "type": "float"
+        },
+        "visible_mysql": {
+          "type": "long"
+        },
+        "visible_static": {
+          "type": "float"
+        }
+      }
+    }
+  
+
+

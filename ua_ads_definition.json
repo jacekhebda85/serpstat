@@ -1,0 +1,207 @@
+{
+    "settings": {
+      "index": {
+        "refresh_interval": "1m",
+        "indexing": {
+          "slowlog": {
+            "level": "info",
+            "threshold": {
+              "index": {
+                "warn": "10s",
+                "trace": "500ms",
+                "debug": "1s",
+                "info": "5s"
+              }
+            },
+            "source": "1000"
+          }
+        },
+        "translog": {
+          "sync_interval": "5s",
+          "durability": "async"
+        },
+        "blocks": {
+          "read_only_allow_delete": "false"
+        },
+        "max_inner_result_window": "60000",
+        "max_result_window": "60000",
+        "store": {
+          "type": "niofs"
+        },
+        "unassigned": {
+          "node_left": {
+            "delayed_timeout": "60m"
+          }
+        },
+        "analysis": {
+          "filter": {
+            "ru_RU": {
+              "locale": "ru_RU",
+              "type": "hunspell",
+              "dedup": "true"
+            },
+            "uk_UA": {
+              "locale": "uk_UA",
+              "type": "hunspell",
+              "dedup": "true"
+            }
+          },
+          "analyzer": {
+            "exact": {
+              "filter": [
+                "lowercase"
+              ],
+              "type": "custom",
+              "tokenizer": "whitespace"
+            },
+            "ukrainian": {
+              "filter": [
+                "lowercase",
+                "uk_UA",
+                "ru_RU"
+              ],
+              "type": "custom",
+              "stopwords": "_none_",
+              "tokenizer": "standard"
+            },
+            "url_analyzer": {
+              "flags": "CASE_INSENSITIVE",
+              "pattern": "[^\\p{IsAlphabetic}\\p{Digit}]+",
+              "type": "pattern"
+            }
+          }
+        },
+        "number_of_replicas": "1"
+        },
+        "codec": "best_compression",
+        "routing": {
+          "allocation": {
+            "total_shards_per_node": "1"
+          }
+        },
+        "search": {
+          "slowlog": {
+            "level": "info",
+            "threshold": {
+              "fetch": {
+                "warn": "1s",
+                "trace": "200ms",
+                "debug": "500ms",
+                "info": "800ms"
+              },
+              "query": {
+                "warn": "10s",
+                "trace": "500ms",
+                "debug": "1s",
+                "info": "5s"
+              }
+            }
+          }
+        },
+        "number_of_shards": "2",
+        "merge": {
+          "scheduler": {
+            "max_thread_count": "6"
+          }
+        }
+      },
+      "mappings": {
+        "dynamic": "false",
+        "properties": {
+          "concurrency": {
+            "type": "byte"
+          },
+          "cost": {
+            "type": "scaled_float",
+            "scaling_factor": 100
+          },
+          "crc": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "date"
+          },
+          "difficulty": {
+            "type": "scaled_float",
+            "scaling_factor": 100
+          },
+          "domain": {
+            "type": "keyword"
+          },
+          "found_results": {
+            "type": "long"
+          },
+          "geo_names": {
+            "type": "keyword"
+          },
+          "keyword": {
+            "type": "text",
+            "fields": {
+              "exact": {
+                "type": "text",
+                "analyzer": "exact"
+              }
+            },
+            "analyzer": "ukrainian"
+          },
+          "keyword_id": {
+            "type": "long"
+          },
+          "keyword_length": {
+            "type": "byte"
+          },
+          "lang": {
+            "type": "keyword"
+          },
+          "leader_group": {
+            "type": "boolean"
+          },
+          "parent_keyword": {
+            "type": "keyword"
+          },
+          "position": {
+            "type": "byte"
+          },
+          "region_queries_count": {
+            "type": "integer"
+          },
+          "region_queries_count_wide": {
+            "type": "integer"
+          },
+          "right_spelling": {
+            "type": "text",
+            "analyzer": "ukrainian"
+          },
+          "subdomain": {
+            "type": "keyword"
+          },
+          "text": {
+            "type": "text",
+            "analyzer": "ukrainian"
+          },
+          "title": {
+            "type": "text",
+            "analyzer": "ukrainian"
+          },
+          "type": {
+            "type": "byte"
+          },
+          "types": {
+            "type": "keyword"
+          },
+          "url": {
+            "type": "keyword",
+            "fields": {
+              "search": {
+                "type": "text",
+                "analyzer": "url_analyzer"
+              }
+            }
+          },
+          "url_crc": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+
