@@ -4,7 +4,7 @@ for index in indices:
 
     output = []
 
-    with open(f'ua_{index}.json', 'r') as file:
+    with open(f'original_data/serpstat_ua_{index}.json', 'r') as file:
         lines= file.readlines()
         for line in lines:
             id=line.split('"')[3]
