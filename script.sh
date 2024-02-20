@@ -17,15 +17,28 @@ git clone https://github.com/itvaleriy/elasticsearch-hunspell-dictionaries
 mv elasticsearch-hunspell-dictionaries/ hunspell
 
 # Load data from your local machine:
-git clone 
-cd transformed_data
 # Server healthcheck (IP address may vary)
-curl 34.106.10.253:9200 
-# Create indices, settings and mapping
-curl -X PUT http://34.106.10.253:9200/ua_keywords/
-curl -d @ua_keywords.settings.json -H "Content-Type: application/json" -X PUT http://34.106.10.253:9200/ua_keywords/_settings
-curl -d @ua_keywords.mapping.json -H "Content-Type: application/json" -X PUT http://34.106.10.253:9200/ua_keywords/_mapping
-# Reindex documents from file to the new index
-curl -d @ua_keywords.json -H "Content-Type: application/json" -X PUT http://34.106.10.253:9200/ua_keywords/_bulk
+curl http://34.106.10.253:9200 
+# Create indices, settings and mapping, be in the right path with all the files from customer
+curl -XPUT http://34.106.10.253:9200/serpstat_ua_ads/
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_ads/ads/  -H "Content-Type: application/json" --data-binary @ua_ads_definition.json
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_ads/ads/_bulk  -H "Content-Type: application/json" --data-binary @serpstat_ua_ads.json
+
+curl -XPUT http://34.106.10.253:9200/serpstat_ua_keywords/
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_keywords/keywords/  -H "Content-Type: application/json" --data-binary @ua_keywords_definition.json
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_keywords/keywords/_bulk  -H "Content-Type: application/json" --data-binary @serpstat_ua_keywords.json
+
+curl -XPUT http://34.106.10.253:9200/serpstat_ua_positions/
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_positions/positions/  -H "Content-Type: application/json" --data-binary @ua_positions_definition.json
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_positions/positions/_bulk  -H "Content-Type: application/json" --data-binary @serpstat_ua_positions.json
+
+curl -XPUT http://34.106.10.253:9200/serpstat_ua_rating/
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_rating/rating/  -H "Content-Type: application/json" --data-binary @ua_rating_definition.json
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_rating/rating/_bulk  -H "Content-Type: application/json" --data-binary @serpstat_ua_rating.json
+
+curl -XPUT http://34.106.10.253:9200/serpstat_ua_suggestions/
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_suggestions/suggestions/  -H "Content-Type: application/json" --data-binary @ua_suggestions_definition.json
+curl -XPOST http://34.106.10.253:9200/serpstat_ua_suggestions/suggestions/_bulk  -H "Content-Type: application/json" --data-binary @serpstat_ua_suggestions.json
+
 # Check if indices are loaded ok
 curl -X GET "34.106.10.253:9200/_cat/indices/" 
